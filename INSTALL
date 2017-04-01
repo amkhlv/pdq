@@ -1,0 +1,16 @@
+
+git clone https://github.com/amkhlv/pdq
+
+sudo aptitude isntall qt5-qmake libpoppler-qt5-dev
+
+mkdir build
+
+cd build
+
+qmake -makefile ../pdq/
+
+make
+
+sudo mv pdq /usr/local/bin/
+
+

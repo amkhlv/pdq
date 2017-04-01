@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PdQMainWindow</class>
+ <widget class="QMainWindow" name="PdQMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>PdQMainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777203</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <property name="leftMargin">
+       <number>1</number>
+      </property>
+      <property name="topMargin">
+       <number>1</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>1</number>
+      </property>
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="PDFView" name="graphicsView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="font">
+    <font>
+     <family>DejaVu Serif</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionReloadFile"/>
+   <addaction name="separator"/>
+   <addaction name="actionNextPage"/>
+   <addaction name="actionPrevPage"/>
+   <addaction name="actionZoomIn"/>
+   <addaction name="actionZoomOut"/>
+   <addaction name="actionGoBack"/>
+   <addaction name="separator"/>
+   <addaction name="actionSearch"/>
+   <addaction name="actionReverse"/>
+   <addaction name="actionAbandonSearch"/>
+   <addaction name="actionGotIt"/>
+   <addaction name="separator"/>
+   <addaction name="actionAddBookmark"/>
+   <addaction name="actionOpenBookmarks"/>
+   <addaction name="actionNavigate"/>
+   <addaction name="separator"/>
+   <addaction name="actionShowTextExtract"/>
+   <addaction name="separator"/>
+  </widget>
+  <action name="actionReloadFile">
+   <property name="text">
+    <string>↺</string>
+   </property>
+   <property name="toolTip">
+    <string>Reload (Ctrl-l)</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>DejaVu Serif</family>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionPrevPage">
+   <property name="text">
+    <string>⇦</string>
+   </property>
+   <property name="toolTip">
+    <string>previous page (p)</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>DejaVu Serif</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="shortcut">
+    <string>P</string>
+   </property>
+  </action>
+  <action name="actionNextPage">
+   <property name="text">
+    <string>⇨</string>
+   </property>
+   <property name="toolTip">
+    <string>next page (n)</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>DejaVu Serif</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="shortcut">
+    <string>N</string>
+   </property>
+  </action>
+  <action name="actionZoomIn">
+   <property name="text">
+    <string>⊕</string>
+   </property>
+   <property name="toolTip">
+    <string>zoom in (.)</string>
+   </property>
+   <property name="shortcut">
+    <string>.</string>
+   </property>
+  </action>
+  <action name="actionZoomOut">
+   <property name="text">
+    <string>⊖</string>
+   </property>
+   <property name="toolTip">
+    <string>zoom out (,)</string>
+   </property>
+   <property name="shortcut">
+    <string>,</string>
+   </property>
+  </action>
+  <action name="actionGoBack">
+   <property name="text">
+    <string>↩</string>
+   </property>
+   <property name="toolTip">
+    <string>go back (b)</string>
+   </property>
+   <property name="shortcut">
+    <string>B</string>
+   </property>
+  </action>
+  <action name="actionSearch">
+   <property name="text">
+    <string>𝒮</string>
+   </property>
+   <property name="toolTip">
+    <string>search (Ctrl-S)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionReverse">
+   <property name="text">
+    <string>ℛ</string>
+   </property>
+   <property name="toolTip">
+    <string>reverse search (Ctrl-R)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionAbandonSearch">
+   <property name="text">
+    <string>𝒢</string>
+   </property>
+   <property name="toolTip">
+    <string>abandon search (Ctrl-G)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
+   </property>
+  </action>
+  <action name="actionGotIt">
+   <property name="text">
+    <string>⏎</string>
+   </property>
+   <property name="toolTip">
+    <string>got it (Enter)</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
+   </property>
+  </action>
+  <action name="actionAddBookmark">
+   <property name="text">
+    <string>a</string>
+   </property>
+   <property name="shortcut">
+    <string>A</string>
+   </property>
+  </action>
+  <action name="actionOpenBookmarks">
+   <property name="text">
+    <string>ℬ</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
+  </action>
+  <action name="actionNavigate">
+   <property name="text">
+    <string>go</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>7</pointsize>
+    </font>
+   </property>
+   <property name="shortcut">
+    <string>G</string>
+   </property>
+  </action>
+  <action name="actionShowTextExtract">
+   <property name="text">
+    <string>txt</string>
+   </property>
+   <property name="toolTip">
+    <string>show plain text (t)</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>7</pointsize>
+    </font>
+   </property>
+   <property name="shortcut">
+    <string>T</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>PDFView</class>
+   <extends>QGraphicsView</extends>
+   <header>pdfview.h</header>
+   <slots>
+    <signal>reloadFile()</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionReloadFile</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>ReloadFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionPrevPage</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>PrevPage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNextPage</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>NextPage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionZoomIn</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>ZoomIn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionZoomOut</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>ZoomOut()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionGoBack</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>GoBack()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSearch</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>StartSearching()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionReverse</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>StartSearchingInReverse()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAbandonSearch</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>StopSearching()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionGotIt</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>GotIt()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionOpenBookmarks</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>OpenBookmarks()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAddBookmark</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>AddNewBookmark()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNavigate</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>Navigate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShowTextExtract</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>ShowTextExtract()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ReloadFile()</slot>
+  <slot>PrevPage()</slot>
+  <slot>NextPage()</slot>
+  <slot>ZoomIn()</slot>
+  <slot>ZoomOut()</slot>
+  <slot>GoBack()</slot>
+  <slot>StartSearching()</slot>
+  <slot>StartSearchingInReverse()</slot>
+  <slot>StopSearching()</slot>
+  <slot>Search(QString,bool)</slot>
+  <slot>GotIt()</slot>
+  <slot>OpenBookmarks()</slot>
+  <slot>AddNewBookmark()</slot>
+  <slot>Navigate()</slot>
+  <slot>ShowPage(int)</slot>
+  <slot>PushCurrentPage()</slot>
+  <slot>ShowTextExtract()</slot>
+ </slots>
+</ui>
