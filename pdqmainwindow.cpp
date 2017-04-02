@@ -153,7 +153,7 @@ bool PdQMainWindow::search(int pagenumber)
     QList<QRectF> locations = pdfPage->search(searchState.searchTerm, Poppler::Page::IgnoreCase, Poppler::Page::Rotate0);
     int s = locations.size();
     if (searchState.justReversed) {
-        qDebug() << "-- reversed --";
+        //qDebug() << "-- reversed --";
         searchState.searchResultsShown = s + 1 - searchState.searchResultsShown;
     }
     int n = ((searchState.isOnReverse) ? (s - 1 - searchState.searchResultsShown) : searchState.searchResultsShown) ;
@@ -217,7 +217,7 @@ void PdQMainWindow::StartSearching(){
     if (searchState.searching) {
         searchForward();
     } else {
-        qDebug() << "Starting Searching";
+        //qDebug() << "Starting Searching";
         SearchDialog* dialog = new SearchDialog(this, false);
         connect(dialog, SIGNAL(search(QString,bool)), this, SLOT(Search(QString,bool)));
         dialog->show();
@@ -227,7 +227,7 @@ void PdQMainWindow::StartSearchingInReverse(){
     if (searchState.searching) {
         searchBack();
     } else {
-        qDebug() << "Start Searching in reverse";
+        //qDebug() << "Start Searching in reverse";
         SearchDialog* dialog = new SearchDialog(this, true);
         connect(dialog, SIGNAL(search(QString,bool)), this, SLOT(Search(QString,bool)));
         dialog->show();

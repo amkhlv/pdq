@@ -54,11 +54,11 @@ Keyboard Shortcuts
 </tr><tr>
 <td>Give Up Searching</td><td>Ctrl-g</td><td>𝒢</td>
 </tr><tr>
-<td>Stop Searching</td><td>Return</td><td>¢</td>
+<td>Stop Searching</td><td>Return</td><td>⏎</td>
 </tr><tr>
-<td>Open bookmarks</td><td>Ctrl-b</td><td>ℬℬ</td>
+<td>Open bookmarks</td><td>Ctrl-b</td><td>ℬ</td>
 </tr><tr>
-<td>Add bookmark</td><td>a</td><td>aℬ</td>
+<td>Add bookmark</td><td>a</td><td>a</td>
 </tr><tr>
 <td>Go to page</td><td>g</td><td>go</td>
 </tr><tr>

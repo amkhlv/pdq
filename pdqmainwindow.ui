@@ -84,7 +84,7 @@
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="sizePolicy">
-    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
@@ -129,7 +129,7 @@
     <string>↺</string>
    </property>
    <property name="toolTip">
-    <string>Reload (Ctrl-l)</string>
+    <string>Reload (Ctrl-L)</string>
    </property>
    <property name="font">
     <font>
@@ -257,6 +257,9 @@
    <property name="text">
     <string>a</string>
    </property>
+   <property name="toolTip">
+    <string>add bookmark (a)</string>
+   </property>
    <property name="shortcut">
     <string>A</string>
    </property>
@@ -265,6 +268,9 @@
    <property name="text">
     <string>ℬ</string>
    </property>
+   <property name="toolTip">
+    <string>bookmarks (Ctrl-B)</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+B</string>
    </property>
@@ -272,6 +278,9 @@
   <action name="actionNavigate">
    <property name="text">
     <string>go</string>
+   </property>
+   <property name="toolTip">
+    <string>go to page...</string>
    </property>
    <property name="font">
     <font>
