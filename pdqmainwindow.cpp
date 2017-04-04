@@ -150,7 +150,7 @@ bool PdQMainWindow::search(int pagenumber)
 {
     qreal r = dpi / 72.0;
     Poppler::Page* pdfPage = document->page(pagenumber);
-    QList<QRectF> locations = pdfPage->search(searchState.searchTerm, Poppler::Page::IgnoreCase, Poppler::Page::Rotate0);
+    QList<QRectF> locations = pdfPage->search(searchState.searchTerm, Poppler::Page::IgnoreCase);
     int s = locations.size();
     if (searchState.justReversed) {
         //qDebug() << "-- reversed --";
@@ -174,10 +174,8 @@ void PdQMainWindow::searchForward()
 {
     int pageNow = currentPageNum;
     searchState.searching = true;
-    if (searchState.isOnReverse) {
-        searchState.justReversed = true;
-        searchState.isOnReverse = false;
-    }
+    searchState.justReversed = searchState.isOnReverse;
+    searchState.isOnReverse = false;
     int n = 0;
     while (n < numPages) {
        if (search((pageNow + n) % numPages)) { break ; }
@@ -190,10 +188,8 @@ void PdQMainWindow::searchBack()
 {
     int pageNow = currentPageNum;
     searchState.searching = true;
-    if (! searchState.isOnReverse) {
-        searchState.justReversed = true;
-        searchState.isOnReverse = true;
-    }
+    searchState.justReversed = !searchState.isOnReverse;
+    searchState.isOnReverse = true;
     int n = 0;
     while (n < numPages) {
         int m = pageNow - n;
