@@ -106,8 +106,8 @@
    </attribute>
    <addaction name="actionReloadFile"/>
    <addaction name="separator"/>
-   <addaction name="actionNextPage"/>
    <addaction name="actionPrevPage"/>
+   <addaction name="actionNextPage"/>
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
    <addaction name="actionGoBack"/>
