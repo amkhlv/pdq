@@ -3,6 +3,12 @@ Description
 
 A minimalistic PDF viewer
 
+Known bug
+=========
+
+When run forwarded over `ssh -X`, incorrect rendering __at first run__ (see [bug report](https://bugreports.qt.io/browse/QTBUG-61976)).
+I don't know how to fix this...
+
 Invocation
 ==========
 
