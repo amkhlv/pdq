@@ -81,3 +81,9 @@ Using the bookmarks manager
 It lists bookmarks with charhints (a,b,c,d,...). Pressing the corresponding
 letter navigates to that bookmarked page. Pressing the letter with `Shift`
 (as if a capital letter) removes that bookmark.
+
+Making annotations
+==================
+
+Right click with mouse on the place where you want to place the anchor. The dialog for entering annotation will pop up.
+

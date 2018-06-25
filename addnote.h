@@ -14,6 +14,9 @@ class AddNote : public QDialog
 
 public:
     explicit AddNote(QWidget *parent , int page, qreal x, qreal y);
+    int r;
+    int g;
+    int b;
     int page;
     qreal x;
     qreal y;
@@ -21,6 +24,8 @@ public:
 
 public slots:
     void save();
+    void chooseColor();
+    void setColor(QColor qc);
 
 signals:
     void saveNewNote(int p, qreal x, qreal y, int r, int g, int b, QString txt);

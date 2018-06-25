@@ -80,9 +80,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButtonColor</sender>
+   <signal>clicked()</signal>
+   <receiver>AddNote</receiver>
+   <slot>chooseColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>424</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>331</x>
+     <y>227</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>saveNewNote(int,qreal,qreal,int,int,int,QString)</signal>
   <slot>save()</slot>
+  <slot>chooseColor()</slot>
  </slots>
 </ui>
