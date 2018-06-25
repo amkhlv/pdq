@@ -26,7 +26,7 @@ Bookmarks::Bookmarks(QWidget *parent, QString filename) :
         QLabel* l = new QLabel(this);
         QString pnumStr = QString(p.firstChild().toText().data());
         int pnum = pnumStr.toInt();
-        l->setText(QString(QChar('a' + i)) + QString(" -> ") + t.data() + QString(" -> ") + pnumStr);
+        l->setText(QString(QChar('a' + i)) + QString(" -> ") + t.data() + QString(" -> ") + QString::number(pnum + 1));
         labels.append(l);
         pageNumbers.append(pnum);
         ui->verticalLayout->findChild<QVBoxLayout*>(QString("bmlistLayout"))->addWidget(l);
