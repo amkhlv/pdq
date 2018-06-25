@@ -10,6 +10,8 @@
 #include <QSize>
 #include <QStack>
 #include <searchstate.h>
+#include <QFile>
+#include "note.h"
 
 namespace Ui {
 class PdQMainWindow;
@@ -24,7 +26,7 @@ public:
     ~PdQMainWindow();
     Poppler::Document* document;
     int numPages;
-    void loadFile(QString name);
+    void loadFile();
     void preparePage(int pagenumber);
     QString filename;
     QGraphicsScene *pageScene;
@@ -40,6 +42,8 @@ public:
     QLabel *pageNumLabel;
     QLabel *totalPagesLabel;
     QLabel *resolutionLabel;
+    QList<Note> *notes;
+    QFile *pdqFile;
 
 
 public slots:
@@ -61,6 +65,7 @@ public slots:
     void ShowPage(int pagenumber);
     void PushCurrentPage();
     void ShowTextExtract();
+    void AddNewNote(int p, qreal x, qreal y, int r, int g, int b, QString txt);
 
 private:
     Ui::PdQMainWindow *ui;

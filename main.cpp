@@ -18,7 +18,8 @@ int main(int argc, char *argv[])
         case 'p': startpage = QString(optarg).toInt();
         }
     QString f = argv[optind];
-    w.loadFile(f);
+    w.filename = f;
+    w.loadFile();
     w.dpi = 100;
     w.setWindowTitle(f);
     w.preparePage(startpage);

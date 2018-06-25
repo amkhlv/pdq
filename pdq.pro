@@ -32,7 +32,9 @@ SOURCES += main.cpp\
     utils.cpp \
     addbookmark.cpp \
     navdialog.cpp \
-    textextract.cpp
+    textextract.cpp \
+    note.cpp \
+    addnote.cpp
 
 HEADERS  += pdqmainwindow.h \
     pdfview.h \
@@ -42,14 +44,17 @@ HEADERS  += pdqmainwindow.h \
     utils.h \
     addbookmark.h \
     navdialog.h \
-    textextract.h
+    textextract.h \
+    note.h \
+    addnote.h
 
 FORMS    += pdqmainwindow.ui \
     searchdialog.ui \
     bookmarks.ui \
     addbookmark.ui \
     navdialog.ui \
-    textextract.ui
+    textextract.ui \
+    addnote.ui
 
 #INCLUDEPATH += /usr/include/poppler/qt5/
 #DEPENDPATH += /usr/lib/x86_64-linux-gnu/

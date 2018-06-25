@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "pdqmainwindow.h"
 #include "ui_pdqmainwindow.h"
 #include "searchstate.h"
@@ -18,7 +19,6 @@
 #include <QScrollBar>
 #include <QKeyEvent>
 
-
 PdQMainWindow::PdQMainWindow(QWidget *parent) :
     QMainWindow(parent),
     pageScene(new QGraphicsScene(this)),
@@ -27,7 +27,8 @@ PdQMainWindow::PdQMainWindow(QWidget *parent) :
     totalPagesLabel(new QLabel(this)),
     resolutionLabel(new QLabel(this)),
     ui(new Ui::PdQMainWindow),
-    searchState(SearchState())
+    searchState(SearchState()),
+    notes(new QList<Note>())
 {
     ui->setupUi(this);
     pageNumLabel->setAlignment(Qt::AlignCenter);
@@ -52,15 +53,21 @@ PdQMainWindow::~PdQMainWindow()
     delete pageNumLabel;
     delete totalPagesLabel;
     delete resolutionLabel;
+    delete pdqFile;
+    delete notes;
 }
 
-void PdQMainWindow::loadFile(QString name)
+void PdQMainWindow::loadFile()
 {
-    filename = name;
     document = Poppler::Document::load(filename);
     document->setRenderHint(Poppler::Document::Antialiasing , true);
     document->setRenderHint(Poppler::Document::TextAntialiasing, true);
     numPages = document->numPages();
+    QDomDocument d;
+    pdqFile = new QFile(Utils::bookmarksFileName(filename));
+    Utils::readDocFromFile(d, pdqFile);
+    delete notes;
+    notes = Utils::getNotesFromDoc(d);
 }
 
 void PdQMainWindow::preparePage(int pagenum)
@@ -83,6 +90,24 @@ void PdQMainWindow::preparePage(int pagenum)
     hbar = ui->graphicsView->horizontalScrollBar();
     vbar = ui->graphicsView->verticalScrollBar();
     links = pdfPage->links();
+    for (int n=0; n < notes->size() ; n++) {
+        if (notes->at(n).p == currentPageNum) {
+            qDebug() << notes->at(n).x ;
+            qDebug() << notes->at(n).y ;
+            int x = static_cast<int>((static_cast<float>(pageSizeX)) * notes->at(n).x) ;
+            int y = static_cast<int>((static_cast<float>(pageSizeY)) * notes->at(n).y) ;
+            qDebug() << x ;
+            qDebug() << y ;
+            QRectF loc = QRectF(x - 8, y - 8, 16, 16);
+            QGraphicsEllipseItem *ellipse = pageScene->addEllipse(
+                        loc,
+                        QPen(),
+                        QBrush(QColor(notes->at(n).r, notes->at(n).g, notes->at(n).b, 255))
+                        );
+            ellipse->show();
+        }
+    }
+
 }
 void PdQMainWindow::keyPressEvent(QKeyEvent *k){
     qint8 s = (k->modifiers() & Qt::ShiftModifier) ? 10 : 3;
@@ -101,7 +126,7 @@ void PdQMainWindow::keyPressEvent(QKeyEvent *k){
 }
 void PdQMainWindow::ReloadFile()
 {
-    loadFile(filename);
+    loadFile();
     if (currentPageNum < numPages)
         preparePage(currentPageNum);
     else
@@ -279,4 +304,30 @@ void PdQMainWindow::ShowTextExtract(){
     TextExtract* txtxtr = new TextExtract(this, currentPage->text(QRectF()));
     txtxtr->show();
 }
+
+void PdQMainWindow::AddNewNote(int p, qreal x, qreal y, int r, int g, int b, QString txt) {
+    QDomDocument doc;
+    Utils::readDocFromFile(doc, pdqFile);
+    QDomElement newnote = doc.createElement("note");
+    newnote.setAttribute("page", QString::number(p));
+    newnote.setAttribute("x", QString::number(x));
+    newnote.setAttribute("y", QString::number(y));
+    newnote.setAttribute("r", QString::number(r));
+    newnote.setAttribute("g", QString::number(g));
+    newnote.setAttribute("b", QString::number(b));
+    newnote.appendChild(doc.createTextNode(txt));
+    QDomNode root = doc.firstChild();
+    QDomNodeList underRoot = root.childNodes();
+    if (doc.elementsByTagName("notes").length() == 0) root.appendChild(doc.createElement("notes"));
+
+    for (int i =0; i < underRoot.size(); i++) {
+        QDomNode nd = underRoot.item(i);
+        if (nd.nodeName() == QString("notes")) {
+            nd.appendChild(newnote);
+        }
+    }
+    Utils::writeDocToFile(doc, pdqFile);
+    ReloadFile();
+}
+
 
