@@ -1,7 +1,7 @@
 Description
 ===========
 
-A minimalistic PDF viewer
+A minimalistic PDF viewer with ergonomic keyboard shortcuts, bookmarks and annotations.
 
 Known bug
 =========
