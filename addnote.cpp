@@ -13,10 +13,15 @@ AddNote::AddNote(QWidget *parent, int page, qreal x, qreal y) :
     ui(new Ui::AddNote)
 {
     ui->setupUi(this);
+    ui->pushButtonColor->setStyleSheet("color: rgb(" + QString::number(r) + "," + QString::number(g) + "," + QString::number(b) + ")");
 }
 
 void AddNote::save() {
     emit saveNewNote(page, x, y, r, g, b, ui->textEdit->toPlainText());
+    accept();
+}
+
+void AddNote::cancel() {
     accept();
 }
 

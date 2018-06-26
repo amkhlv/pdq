@@ -24,6 +24,7 @@ public:
 
 public slots:
     void save();
+    void cancel();
     void chooseColor();
     void setColor(QColor qc);
 
