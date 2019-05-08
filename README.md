@@ -87,3 +87,6 @@ Making annotations
 
 Right click with mouse on the place where you want to place the anchor. The dialog for entering annotation will pop up.
 
+To display an annotation, left-click on its anchor.
+
+Annotations are saved in the same `filename.pdq` as bookmarks.
