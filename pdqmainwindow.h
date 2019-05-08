@@ -11,6 +11,7 @@
 #include <QStack>
 #include <searchstate.h>
 #include <QFile>
+#include <QClipboard>
 #include "note.h"
 
 namespace Ui {
@@ -66,6 +67,7 @@ public slots:
     void PushCurrentPage();
     void ShowTextExtract();
     void AddNewNote(int p, qreal x, qreal y, int r, int g, int b, QString txt);
+    void CopyPathToPDF();
 
 private:
     Ui::PdQMainWindow *ui;

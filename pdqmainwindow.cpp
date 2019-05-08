@@ -18,6 +18,7 @@
 #include <QRectF>
 #include <QScrollBar>
 #include <QKeyEvent>
+#include <QClipboard>
 
 PdQMainWindow::PdQMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -328,6 +329,12 @@ void PdQMainWindow::AddNewNote(int p, qreal x, qreal y, int r, int g, int b, QSt
     }
     Utils::writeDocToFile(doc, pdqFile);
     ReloadFile();
+}
+
+void PdQMainWindow::CopyPathToPDF() {
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setText(filename);
+
 }
 
 

@@ -121,6 +121,7 @@
    <addaction name="actionOpenBookmarks"/>
    <addaction name="actionNavigate"/>
    <addaction name="separator"/>
+   <addaction name="actionCopyPath"/>
    <addaction name="actionShowTextExtract"/>
    <addaction name="separator"/>
   </widget>
@@ -305,6 +306,17 @@
    </property>
    <property name="shortcut">
     <string>T</string>
+   </property>
+  </action>
+  <action name="actionCopyPath">
+   <property name="text">
+    <string>c</string>
+   </property>
+   <property name="toolTip">
+    <string>copy path to clipboard (c)</string>
+   </property>
+   <property name="shortcut">
+    <string>C</string>
    </property>
   </action>
  </widget>
@@ -545,6 +557,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionCopyPath</sender>
+   <signal>triggered()</signal>
+   <receiver>PdQMainWindow</receiver>
+   <slot>CopyPathToPDF()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>383</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ReloadFile()</slot>
@@ -564,5 +592,6 @@
   <slot>ShowPage(int)</slot>
   <slot>PushCurrentPage()</slot>
   <slot>ShowTextExtract()</slot>
+  <slot>CopyPathToPDF()</slot>
  </slots>
 </ui>
