@@ -66,6 +66,7 @@ void PdQMainWindow::loadFile()
     numPages = document->numPages();
     QDomDocument d;
     pdqFile = new QFile(Utils::bookmarksFileName(filename));
+    Utils::checkBookmarksFile(pdqFile);
     Utils::readDocFromFile(d, pdqFile);
     delete notes;
     notes = Utils::getNotesFromDoc(d);
