@@ -1,7 +1,7 @@
 
 git clone https://github.com/amkhlv/pdq
 
-sudo aptitude isntall qt5-qmake libpoppler-qt5-dev
+sudo aptitude install qt5-qmake libpoppler-qt5-dev
 
 mkdir build
 
