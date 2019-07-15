@@ -45,6 +45,7 @@ public:
     QLabel *resolutionLabel;
     QList<Note> *notes;
     QFile *pdqFile;
+    bool willInvert;
 
 
 public slots:

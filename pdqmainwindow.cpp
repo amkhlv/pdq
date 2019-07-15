@@ -70,6 +70,9 @@ void PdQMainWindow::loadFile()
     Utils::readDocFromFile(d, pdqFile);
     delete notes;
     notes = Utils::getNotesFromDoc(d);
+    QDomDocument dconf;
+    Utils::readConfigFromFile(dconf);
+    willInvert = Utils::shouldInvert(dconf);
 }
 
 void PdQMainWindow::preparePage(int pagenum)
@@ -84,6 +87,11 @@ void PdQMainWindow::preparePage(int pagenum)
     pageSizeX = (sz.width()*dpi)/72;
     pageSizeY = (sz.height()*dpi)/72;
     QImage image = pdfPage->renderToImage(dpi,dpi,0,0,pageSizeX,pageSizeY);
+    if (willInvert) {
+        pageScene->setBackgroundBrush(Qt::black);
+        //image.invertPixels();
+        image.invertPixels(QImage::InvertRgba);
+    }
     QPixmap ipix = QPixmap::fromImage(image);
     QGraphicsPixmapItem *pageItem = pageScene->addPixmap(ipix);
     ui->graphicsView->setScene(pageScene);
