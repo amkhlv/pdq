@@ -68,6 +68,7 @@ void PdQMainWindow::loadFile()
     pdqFile = new QFile(Utils::bookmarksFileName(filename));
     Utils::checkBookmarksFile(pdqFile);
     Utils::readDocFromFile(d, pdqFile);
+    delete pdqFile;
     delete notes;
     notes = Utils::getNotesFromDoc(d);
     QDomDocument dconf;
@@ -80,13 +81,13 @@ void PdQMainWindow::preparePage(int pagenum)
     totalPagesLabel->setText(QString::number(numPages));
     resolutionLabel->setText(QString::number(dpi));
     pageNumLabel->setText(QString::number(pagenum + 1)+"/");
-    Poppler::Page* pdfPage = document->page(pagenum);
-    currentPage = pdfPage;
+    currentPage = document->page(pagenum);
     currentPageNum = pagenum;
-    QSize sz = pdfPage->pageSize();
+    QSize sz = currentPage->pageSize();
     pageSizeX = (sz.width()*dpi)/72;
     pageSizeY = (sz.height()*dpi)/72;
-    QImage image = pdfPage->renderToImage(dpi,dpi,0,0,pageSizeX,pageSizeY);
+    QImage image = currentPage->renderToImage(dpi,dpi,0,0,pageSizeX,pageSizeY);
+    pageScene->clear();
     if (willInvert) {
         pageScene->setBackgroundBrush(Qt::black);
         //image.invertPixels();
@@ -99,7 +100,7 @@ void PdQMainWindow::preparePage(int pagenum)
     pageItem->show();
     hbar = ui->graphicsView->horizontalScrollBar();
     vbar = ui->graphicsView->verticalScrollBar();
-    links = pdfPage->links();
+    links = currentPage->links();
     for (int n=0; n < notes->size() ; n++) {
         if (notes->at(n).p == currentPageNum) {
             qDebug() << notes->at(n).x ;
