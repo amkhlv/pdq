@@ -72,8 +72,19 @@ QList<Note>* getNotesFromDoc(QDomDocument &doc) {
 }
 
 bool shouldInvert(QDomDocument &doc) {
-    return doc.elementsByTagName(QString("invert")).length() > 0 ;
+    return ! doc.elementsByTagName(QString("invert")).isEmpty();
+}
+
+qint16 getDPI(QDomDocument &doc) {
+    QDomNodeList ress = doc.elementsByTagName(QString("dpi"));
+    if (ress.isEmpty()) {
+        return 100;
+    } else {
+        QString res = ress.at(0).toElement().text() ;
+        return res.toInt();
+    }
 }
 
 
 }
+

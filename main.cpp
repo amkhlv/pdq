@@ -1,4 +1,5 @@
 #include "pdqmainwindow.h"
+#include "utils.h"
 #include <QApplication>
 #include <poppler-qt5.h>
 #include <QDebug>
@@ -20,7 +21,10 @@ int main(int argc, char *argv[])
     QString f = argv[optind];
     w.filename = f;
     w.loadFile();
-    w.dpi = 100;
+    QDomDocument dconf;
+    Utils::readConfigFromFile(dconf);
+    w.dpi = Utils::getDPI(dconf);
+    w.willInvert = Utils::shouldInvert(dconf);
     w.setWindowTitle(f);
     w.preparePage(startpage);
 

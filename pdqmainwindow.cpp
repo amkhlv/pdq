@@ -71,9 +71,6 @@ void PdQMainWindow::loadFile()
     delete pdqFile;
     delete notes;
     notes = Utils::getNotesFromDoc(d);
-    QDomDocument dconf;
-    Utils::readConfigFromFile(dconf);
-    willInvert = Utils::shouldInvert(dconf);
 }
 
 void PdQMainWindow::preparePage(int pagenum)

@@ -13,7 +13,7 @@ void readDocFromFile(QDomDocument &doc, QFile* f);
 void readConfigFromFile(QDomDocument &doc);
 QList<Note>* getNotesFromDoc(QDomDocument &doc);
 bool shouldInvert(QDomDocument &doc);
-
+qint16 getDPI(QDomDocument &doc);
 }
 
 
