@@ -46,6 +46,7 @@ void PDFView::mousePressEvent(QMouseEvent *m){
             qreal yy = mainwin->notes->at(j).y * static_cast<float>(mainwin->pageSizeY);
             if ( (qAbs(cx -xx) < 10) && (qAbs(cy - yy) < 10) ) {
                 QMessageBox* mb = new QMessageBox(mainwin);
+                mb->setWindowModality(Qt::NonModal);
                 mb->setText(mainwin->notes->at(j).text);
                 mb->show();
             }
