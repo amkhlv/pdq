@@ -44,7 +44,6 @@ public:
     QLabel *totalPagesLabel;
     QLabel *resolutionLabel;
     QList<Note> *notes;
-    QFile *pdqFile;
     bool willInvert;
 
 

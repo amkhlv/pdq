@@ -54,7 +54,6 @@ PdQMainWindow::~PdQMainWindow()
     delete pageNumLabel;
     delete totalPagesLabel;
     delete resolutionLabel;
-    delete pdqFile;
     delete notes;
 }
 
@@ -65,7 +64,7 @@ void PdQMainWindow::loadFile()
     document->setRenderHint(Poppler::Document::TextAntialiasing, true);
     numPages = document->numPages();
     QDomDocument d;
-    pdqFile = new QFile(Utils::bookmarksFileName(filename));
+    QFile* pdqFile = new QFile(Utils::bookmarksFileName(filename));
     Utils::checkBookmarksFile(pdqFile);
     Utils::readDocFromFile(d, pdqFile);
     delete pdqFile;
@@ -315,6 +314,7 @@ void PdQMainWindow::ShowTextExtract(){
 
 void PdQMainWindow::AddNewNote(int p, qreal x, qreal y, int r, int g, int b, QString txt) {
     QDomDocument doc;
+    QFile* pdqFile = new QFile(Utils::bookmarksFileName(filename));
     Utils::readDocFromFile(doc, pdqFile);
     QDomElement newnote = doc.createElement("note");
     newnote.setAttribute("page", QString::number(p));
@@ -335,6 +335,7 @@ void PdQMainWindow::AddNewNote(int p, qreal x, qreal y, int r, int g, int b, QSt
         }
     }
     Utils::writeDocToFile(doc, pdqFile);
+    delete pdqFile;
     ReloadFile();
 }
 
