@@ -2,6 +2,8 @@
 #define NOTE_H
 
 #include <QString>
+#include <QtXml>
+#include <QDomDocument>
 
 class Note
 {
@@ -14,6 +16,7 @@ public:
     int g;
     int b;
     QString text;
+    QDomElement asElementOf(QDomDocument doc);
 };
 
 #endif // NOTE_H

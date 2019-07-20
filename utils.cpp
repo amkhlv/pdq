@@ -55,8 +55,8 @@ QList<Note>* getNotesFromDoc(QDomDocument &doc) {
         QString ystr(attrs.namedItem(QString("y")).nodeValue());
         qreal xr = xstr.toFloat();
         qreal yr = ystr.toFloat();
-        qDebug() << xstr << xr ;
-        qDebug() << ystr << yr ;
+        //qDebug() << xstr << xr ;
+        //qDebug() << ystr << yr ;
         a->append(Note(
                      attrs.namedItem(QString("page")).nodeValue().toInt(),
                      xr,

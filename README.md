@@ -69,6 +69,8 @@ Keyboard Shortcuts
 <td>Go to page</td><td>g</td><td>go</td>
 </tr><tr>
 <td>Extract text</td><td>t</td><td>txt</td>
+</tr><tr>
+<td>Copy path to .pdf to clipboard</td><td>c</td><td>c</td>
 </tr>
 </table>
 
@@ -85,8 +87,32 @@ letter navigates to that bookmarked page. Pressing the letter with `Shift`
 Making annotations
 ==================
 
+Creating annotaions
+-------------------
+
 Right click with mouse on the place where you want to place the anchor. The dialog for entering annotation will pop up.
 
 To display an annotation, left-click on its anchor.
 
 Annotations are saved in the same `filename.pdq` as bookmarks.
+
+Editing or moving annotations
+-----------------------------
+
+Right-click within the existing anchor (a colored circle). The anchor will disappear.
+Right-click again on where you want the anchor to be. The old text will be pre-filled in the dialog.
+(To delete the anchor, just `cancel` istead of `ok`.)
+
+Configuration file
+==================
+
+The configuration file is `~/.config/pdq.xml`
+
+Example is:
+
+    <config>
+    <dpi>112</dpi>
+    <invert/>
+    </config>
+
+The presence of  `<invert/>`  leads to white-on-black display. The `<dpi>112</dpi>` is the initial DPI.

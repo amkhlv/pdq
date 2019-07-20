@@ -13,7 +13,14 @@ class AddNote : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddNote(QWidget *parent , int page, qreal x, qreal y);
+    explicit AddNote(QWidget *parent ,
+                     int page,
+                     qreal x,
+                     qreal y,
+                     int r,
+                     int g,
+                     int b,
+                     QString txt);
     int r;
     int g;
     int b;

@@ -1,4 +1,4 @@
-#include "pdfview.h"
+﻿#include "pdfview.h"
 #include "utils.h"
 #include "addnote.h"
 #include <QDebug>
@@ -20,8 +20,12 @@
 PDFView::PDFView(QWidget *parent) :
     QGraphicsView(parent),
     hbar(horizontalScrollBar()),
-    vbar(verticalScrollBar())
+    vbar(verticalScrollBar()),
+    notesToEdit(QList<Note>())
 {
+
+}
+PDFView::~PDFView() {
 
 }
 
@@ -82,21 +86,58 @@ void PDFView::mousePressEvent(QMouseEvent *m){
             }
         }
     } else if (btn == Qt::RightButton) {
-        // QRectF loc = QRectF(cx - 5, cy - 5, 10, 10);
-        // QGraphicsEllipseItem *ellipse = mainwin->pageScene->addEllipse(loc, QPen(), QBrush(QColor(0, 150, 0, 255)));
-        // ellipse->show();
-        AddNote* dialog = new AddNote(
-                    this,
-                    mainwin->currentPageNum,
-                    static_cast<float>(cx)/static_cast<float>(mainwin->pageSizeX),
-                    static_cast<float>(cy)/static_cast<float>(mainwin->pageSizeY)
+        bool clicked_on_white = true;
+        QList<Note>* notes = mainwin->notes  ;
+        int nlength = notes->length();
+        for (int j=0; j < nlength; j++) {
+            qreal xx = notes->at(j).x * static_cast<float>(mainwin->pageSizeX);
+            qreal yy = notes->at(j).y * static_cast<float>(mainwin->pageSizeY);
+            if ( (qAbs(cx -xx) < 10) && (qAbs(cy - yy) < 10) ) {
+                clicked_on_white = false;
+                notesToEdit.prepend(notes->at(j));
+                QDomDocument doc;
+                QFile* pdqFile = new QFile(Utils::bookmarksFileName(mainwin->filename));
+                Utils::readDocFromFile(doc, pdqFile);
+                QDomNode oldnotes = doc.elementsByTagName("notes").at(0);
+                QDomNode root = doc.documentElement();
+                QDomElement newnotes = doc.createElement(QString("notes"));
+                for (int k=0; k < nlength; k++) {
+                    if (k != j) {
+                        Note n = notes->at(k);
+                        newnotes.appendChild(n.asElementOf(doc));
+                    }
+                }
+                j = nlength;
+                root.replaceChild(newnotes,oldnotes);
+                Utils::writeDocToFile(doc, pdqFile);
+                delete pdqFile;
+                mainwin->ReloadFile();
+            }
+        }
+        if (clicked_on_white) {
+            bool noteEditingInProcess = !notesToEdit.isEmpty();
+            int r = noteEditingInProcess ? notesToEdit.first().r : 250;
+            int g = noteEditingInProcess ? notesToEdit.first().g : 250;
+            int b = noteEditingInProcess ? notesToEdit.first().b : 0;
+            QString txt = noteEditingInProcess ? notesToEdit.first().text : "";
+            if (noteEditingInProcess)  notesToEdit.removeFirst();
+            AddNote* dialog = new AddNote(
+                        this,
+                        mainwin->currentPageNum,
+                        static_cast<float>(cx)/static_cast<float>(mainwin->pageSizeX),
+                        static_cast<float>(cy)/static_cast<float>(mainwin->pageSizeY),
+                        r,
+                        g,
+                        b,
+                        txt
+                        );
+            connect(dialog,
+                    SIGNAL(saveNewNote(int, qreal, qreal, int, int, int, QString)),
+                    mainwin,
+                    SLOT(AddNewNote(int, qreal, qreal, int, int, int, QString))
                     );
-        connect(dialog,
-                SIGNAL(saveNewNote(int, qreal, qreal, int, int, int, QString)),
-                mainwin,
-                SLOT(AddNewNote(int, qreal, qreal, int, int, int, QString))
-                );
-        dialog->show();
+            dialog->show();
+        }
     }
 }
 

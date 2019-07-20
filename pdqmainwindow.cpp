@@ -99,12 +99,12 @@ void PdQMainWindow::preparePage(int pagenum)
     links = currentPage->links();
     for (int n=0; n < notes->size() ; n++) {
         if (notes->at(n).p == currentPageNum) {
-            qDebug() << notes->at(n).x ;
-            qDebug() << notes->at(n).y ;
+            //qDebug() << notes->at(n).x ;
+            //qDebug() << notes->at(n).y ;
             int x = static_cast<int>((static_cast<float>(pageSizeX)) * notes->at(n).x) ;
             int y = static_cast<int>((static_cast<float>(pageSizeY)) * notes->at(n).y) ;
-            qDebug() << x ;
-            qDebug() << y ;
+            //qDebug() << x ;
+            //qDebug() << y ;
             QRectF loc = QRectF(x - 8, y - 8, 16, 16);
             QGraphicsEllipseItem *ellipse = pageScene->addEllipse(
                         loc,
@@ -316,24 +316,12 @@ void PdQMainWindow::AddNewNote(int p, qreal x, qreal y, int r, int g, int b, QSt
     QDomDocument doc;
     QFile* pdqFile = new QFile(Utils::bookmarksFileName(filename));
     Utils::readDocFromFile(doc, pdqFile);
-    QDomElement newnote = doc.createElement("note");
-    newnote.setAttribute("page", QString::number(p));
-    newnote.setAttribute("x", QString::number(x));
-    newnote.setAttribute("y", QString::number(y));
-    newnote.setAttribute("r", QString::number(r));
-    newnote.setAttribute("g", QString::number(g));
-    newnote.setAttribute("b", QString::number(b));
-    newnote.appendChild(doc.createTextNode(txt));
-    QDomNode root = doc.firstChild();
-    QDomNodeList underRoot = root.childNodes();
-    if (doc.elementsByTagName("notes").length() == 0) root.appendChild(doc.createElement("notes"));
-
-    for (int i =0; i < underRoot.size(); i++) {
-        QDomNode nd = underRoot.item(i);
-        if (nd.nodeName() == QString("notes")) {
-            nd.appendChild(newnote);
-        }
-    }
+    Note newnote = Note(p,x,y,r,g,b,txt);
+    QDomElement nn = newnote.asElementOf(doc);
+    QDomNode root = doc.documentElement();
+    if (doc.elementsByTagName("notes").isEmpty()) root.appendChild(doc.createElement("notes"));
+    QDomNodeList notesElems = doc.elementsByTagName("notes");
+    notesElems.at(0).appendChild(nn);
     Utils::writeDocToFile(doc, pdqFile);
     delete pdqFile;
     ReloadFile();

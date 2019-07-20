@@ -4,12 +4,14 @@
 #include <QGraphicsView>
 #include <poppler-qt5.h>
 #include <pdqmainwindow.h>
+#include "note.h"
 
 
 class PDFView : public QGraphicsView
 {
 public:
     explicit PDFView(QWidget *parent = 0);
+    ~PDFView();
     PdQMainWindow* mainwin;
     QScrollBar* hbar;
     QScrollBar* vbar;
@@ -18,6 +20,7 @@ public:
 private:
     void mouseMoveEvent(QMouseEvent *m);
     void mousePressEvent(QMouseEvent *m);
+    QList<Note> notesToEdit;
 
 
 };

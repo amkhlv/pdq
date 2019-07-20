@@ -2,18 +2,19 @@
 #include "ui_addnote.h"
 #include <QColorDialog>
 
-AddNote::AddNote(QWidget *parent, int page, qreal x, qreal y) :
+AddNote::AddNote(QWidget *parent, int page, qreal x, qreal y, int r, int g, int b, QString txt) :
     QDialog(parent),
     page(page),
     x(x),
     y(y),
-    r(250),
-    g(250),
-    b(0),
+    r(r),
+    g(g),
+    b(b),
     ui(new Ui::AddNote)
 {
     ui->setupUi(this);
     ui->pushButtonColor->setStyleSheet("color: rgb(" + QString::number(r) + "," + QString::number(g) + "," + QString::number(b) + ")");
+    ui->textEdit->setText(txt);
 }
 
 void AddNote::save() {
