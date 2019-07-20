@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     navdialog.cpp \
     textextract.cpp \
     note.cpp \
-    addnote.cpp
+    addnote.cpp \
+    config.cpp
 
 HEADERS  += pdqmainwindow.h \
     pdfview.h \
@@ -46,7 +47,8 @@ HEADERS  += pdqmainwindow.h \
     navdialog.h \
     textextract.h \
     note.h \
-    addnote.h
+    addnote.h \
+    config.h
 
 FORMS    += pdqmainwindow.ui \
     searchdialog.ui \

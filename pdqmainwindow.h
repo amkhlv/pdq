@@ -13,6 +13,7 @@
 #include <QFile>
 #include <QClipboard>
 #include "note.h"
+#include "config.h"
 
 namespace Ui {
 class PdQMainWindow;
@@ -23,7 +24,7 @@ class PdQMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit PdQMainWindow(QWidget *parent = 0);
+    explicit PdQMainWindow(QWidget *parent = 0, Config *conf = new Config());
     ~PdQMainWindow();
     Poppler::Document* document;
     int numPages;
@@ -38,13 +39,13 @@ public:
     QList <Poppler::Link*> links;
     qint32 pageSizeX;
     qint32 pageSizeY;
-    qint16 dpi;
     QStack <int> beforeJump;
     QLabel *pageNumLabel;
     QLabel *totalPagesLabel;
     QLabel *resolutionLabel;
     QList<Note> *notes;
-    bool willInvert;
+    Config *conf;
+
 
 
 public slots:

@@ -20,7 +20,7 @@
 #include <QKeyEvent>
 #include <QClipboard>
 
-PdQMainWindow::PdQMainWindow(QWidget *parent) :
+PdQMainWindow::PdQMainWindow(QWidget *parent, Config *conf) :
     QMainWindow(parent),
     pageScene(new QGraphicsScene(this)),
     beforeJump(QStack<int>()),
@@ -29,7 +29,8 @@ PdQMainWindow::PdQMainWindow(QWidget *parent) :
     resolutionLabel(new QLabel(this)),
     ui(new Ui::PdQMainWindow),
     searchState(SearchState()),
-    notes(new QList<Note>())
+    notes(new QList<Note>()),
+    conf(conf)
 {
     ui->setupUi(this);
     pageNumLabel->setAlignment(Qt::AlignCenter);
@@ -75,16 +76,16 @@ void PdQMainWindow::loadFile()
 void PdQMainWindow::preparePage(int pagenum)
 {
     totalPagesLabel->setText(QString::number(numPages));
-    resolutionLabel->setText(QString::number(dpi));
+    resolutionLabel->setText(QString::number(conf->dpi));
     pageNumLabel->setText(QString::number(pagenum + 1)+"/");
     currentPage = document->page(pagenum);
     currentPageNum = pagenum;
     QSize sz = currentPage->pageSize();
-    pageSizeX = (sz.width()*dpi)/72;
-    pageSizeY = (sz.height()*dpi)/72;
-    QImage image = currentPage->renderToImage(dpi,dpi,0,0,pageSizeX,pageSizeY);
+    pageSizeX = (sz.width()*conf->dpi)/72;
+    pageSizeY = (sz.height()*conf->dpi)/72;
+    QImage image = currentPage->renderToImage(conf->dpi,conf->dpi,0,0,pageSizeX,pageSizeY);
     pageScene->clear();
-    if (willInvert) {
+    if (conf->invert) {
         pageScene->setBackgroundBrush(Qt::black);
         //image.invertPixels();
         image.invertPixels(QImage::InvertRgba);
@@ -150,20 +151,20 @@ void PdQMainWindow::ZoomIn(){
     int h = hbar->value();
     delete pageScene;
     pageScene = new QGraphicsScene(this);
-    dpi = dpi + 4;
+    conf->dpi = conf->dpi + 4;
     preparePage(currentPageNum);
-    hbar->setValue(dpi * h / (dpi - 4));
-    vbar->setValue(dpi * v / (dpi - 4));
+    hbar->setValue(conf->dpi * h / (conf->dpi - 4));
+    vbar->setValue(conf->dpi * v / (conf->dpi - 4));
 }
 void PdQMainWindow::ZoomOut(){
     int v = vbar->value();
     int h = hbar->value();
     delete pageScene;
     pageScene = new QGraphicsScene(this);
-    if (dpi > 4) dpi = dpi - 4;
+    if (conf->dpi > 4) conf->dpi = conf->dpi - 4;
     preparePage(currentPageNum);
-    hbar->setValue(dpi * h / (dpi + 4));
-    vbar->setValue(dpi * v / (dpi + 4));
+    hbar->setValue(conf->dpi * h / (conf->dpi + 4));
+    vbar->setValue(conf->dpi * v / (conf->dpi + 4));
 }
 void PdQMainWindow::GoBack(){
     if (!beforeJump.isEmpty()) {
@@ -180,7 +181,7 @@ void PdQMainWindow::pushCurrentPage(){
 
 bool PdQMainWindow::search(int pagenumber)
 {
-    qreal r = dpi / 72.0;
+    qreal r = conf->dpi / 72.0;
     Poppler::Page* pdfPage = document->page(pagenumber);
     QList<QRectF> locations = pdfPage->search(searchState.searchTerm, Poppler::Page::IgnoreCase);
     int s = locations.size();

@@ -38,13 +38,6 @@ void readDocFromFile(QDomDocument &doc, QFile *f) {
     f->close();
 }
 
-void readConfigFromFile(QDomDocument &doc) {
-    QFile *f = new QFile(QDir::homePath() + "/.config/pdq.xml");
-    if (!f->open(QIODevice::ReadOnly) || !doc.setContent(f)) {
-    }
-    f->close();
-}
-
 QList<Note>* getNotesFromDoc(QDomDocument &doc) {
     QDomNodeList notes = doc.elementsByTagName("note");
     QList<Note>* a = new QList<Note>();
@@ -69,20 +62,6 @@ QList<Note>* getNotesFromDoc(QDomDocument &doc) {
                  );
     }
     return a;
-}
-
-bool shouldInvert(QDomDocument &doc) {
-    return ! doc.elementsByTagName(QString("invert")).isEmpty();
-}
-
-qint16 getDPI(QDomDocument &doc) {
-    QDomNodeList ress = doc.elementsByTagName(QString("dpi"));
-    if (ress.isEmpty()) {
-        return 100;
-    } else {
-        QString res = ress.at(0).toElement().text() ;
-        return res.toInt();
-    }
 }
 
 

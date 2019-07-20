@@ -10,7 +10,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    PdQMainWindow w;
+    Config* conf = new Config();
+    PdQMainWindow* w = new PdQMainWindow(0, conf);
     int startpage = 0;
     int opt;
     while ((opt = getopt(argc,argv,"p:")) != EOF)
@@ -19,16 +20,13 @@ int main(int argc, char *argv[])
         case 'p': startpage = QString(optarg).toInt();
         }
     QString f = argv[optind];
-    w.filename = f;
-    w.loadFile();
+    w->filename = f;
+    w->loadFile();
     QDomDocument dconf;
-    Utils::readConfigFromFile(dconf);
-    w.dpi = Utils::getDPI(dconf);
-    w.willInvert = Utils::shouldInvert(dconf);
-    w.setWindowTitle(f);
-    w.preparePage(startpage);
+    w->setWindowTitle(f);
+    w->preparePage(startpage);
 
-    w.show();
+    w->show();
 
     return a.exec();
 }
