@@ -45,10 +45,11 @@ void PDFView::mousePressEvent(QMouseEvent *m){
     int cx = oldCursorPos.x() + hbar->value() - ((corrX > 0)? corrX : 0);
     if (btn == Qt::LeftButton) {
         QList <Poppler::Link*> links = mainwin->links;
-        for (int j=0; j < mainwin->notes->length(); j++) {
-            qreal xx = mainwin->notes->at(j).x * static_cast<float>(mainwin->pageSizeX);
-            qreal yy = mainwin->notes->at(j).y * static_cast<float>(mainwin->pageSizeY);
-            if ( (qAbs(cx -xx) < 10) && (qAbs(cy - yy) < 10) ) {
+        QList<Note>* notes = mainwin->notes  ;
+        for (int j=0; j < notes->length(); j++) {
+            qreal xx = notes->at(j).x * static_cast<float>(mainwin->pageSizeX);
+            qreal yy = notes->at(j).y * static_cast<float>(mainwin->pageSizeY);
+            if ( (qAbs(cx -xx) < 10) && (qAbs(cy - yy) < 10) && (notes->at(j).p == mainwin->currentPageNum) ) {
                 QMessageBox* mb = new QMessageBox(mainwin);
                 mb->setWindowModality(Qt::NonModal);
                 mb->setText(mainwin->notes->at(j).text);
@@ -92,7 +93,7 @@ void PDFView::mousePressEvent(QMouseEvent *m){
         for (int j=0; j < nlength; j++) {
             qreal xx = notes->at(j).x * static_cast<float>(mainwin->pageSizeX);
             qreal yy = notes->at(j).y * static_cast<float>(mainwin->pageSizeY);
-            if ( (qAbs(cx -xx) < 10) && (qAbs(cy - yy) < 10) ) {
+            if ( (qAbs(cx -xx) < 10) && (qAbs(cy - yy) < 10) && (notes->at(j).p == mainwin->currentPageNum) ) {
                 clicked_on_white = false;
                 notesToEdit.prepend(notes->at(j));
                 QDomDocument doc;
