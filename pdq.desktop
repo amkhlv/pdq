@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=pdq PDF viewer
+Exec=pdq %f
+Terminal=false
+MimeType=application/pdf;
+X-Desktop-File-Install-Version=0.23
